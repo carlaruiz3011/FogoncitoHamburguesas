@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fogoncito - Hamburguesas</title>
+    
+    <!-- Conexion con el CSS -->
+     <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+    <div class="logo">
+        <h1>FOGONCITO</h1> <!-- Único H1 de la página -->
+    </div>
+    <nav>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="pages/pedido.html">Mi Pedido</a></li>
+        </ul>
+    </nav>
+</header>
+
+    <!-- Conexion con JS -->
+  <script src="js/main.js"></script>
+ </body>
+</html>
+<main>
+    <section id="promociones">
+        <h2>🔥 Promociones del día</h2>
+        <div class="grilla-productos" id="contenedor-promos">
+            <!-- JavaScript va a inyectar las tarjetas acá -->
+        </div>
+    </section>
+
+    <section id="menu-completo">
+        <h2>🍔 Menú Completo</h2>
+        <div class="grilla-productos" id="contenedor-menu">
+            <!-- JavaScript va a inyectar las tarjetas acá -->
+        </div>
+    </section>
+</main>
+<footer>
+    <div class="carrito-flotante">
+        <span id="contador-carrito">0</span>
+        <a href="pages/pedido.html">Ver mi pedido</a>
+    </div>
+</footer>

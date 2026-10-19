@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fogoncito - Tu Pedido</title>
+    <!-- Ojo: Usamos ../ para salir de la carpeta pages y llegar a css -->
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+    <!-- HEADER (igual al del index, pero con rutas relativas) -->
+    <header>
+        <div class="logo">
+            <h1>FOGONCITO</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Inicio</a></li>
+                <li><a href="pedido.html">Mi Pedido</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main>
+        <h2>Tu Pedido</h2>
+
+        <!-- Acá JavaScript va a inyectar los items del carrito -->
+        <div id="lista-carrito" class="lista-carrito">
+            <!-- Ejemplo de lo que se va a inyectar:
+            <div class="item-carrito">
+                <span class="item-nombre">Full Cheese</span>
+                <span class="item-precio">$11.000</span>
+            </div>
+            -->
+        </div>
+
+        <!-- Total a pagar -->
+        <div class="total-pedido">
+            <h3>Total: <span id="total">$0</span></h3>
+        </div>
+
+        <!-- FORMULARIO DE DATOS DE ENVÍO -->
+        <section class="formulario-datos">
+            <h2>Datos de Envío</h2>
+            <form id="form-pedido" novalidate>
+                
+                <div class="campo">
+                    <label for="nombre">Nombre completo:</label>
+                    <input type="text" id="nombre" name="nombre" placeholder="Ej: Laura Gómez" required>
+                    <span class="error-mensaje" id="error-nombre"></span>
+                </div>
+
+                <div class="campo">
+                    <label for="direccion">Dirección de entrega:</label>
+                    <input type="text" id="direccion" name="direccion" placeholder="Ej: San Martín 123, Mendoza" required>
+                    <span class="error-mensaje" id="error-direccion"></span>
+                </div>
+
+                <div class="campo">
+                    <label for="telefono">Teléfono:</label>
+                    <input type="tel" id="telefono" name="telefono" placeholder="Ej: 2615551234" required>
+                    <span class="error-mensaje" id="error-telefono"></span>
+                </div>
+
+                <!-- CORRECCIÓN E4 del feedback: Aclarar el costo de envío -->
+                <p class="info-envio">
+                    🛵 Envío: <strong>$500</strong> (Gratis en compras mayores a $20.000)
+                </p>
+
+                <button type="submit" class="btn-confirmar">CONFIRMAR PEDIDO</button>
+            </form>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="carrito-flotante">
+            <span id="contador-carrito">0</span>
+            <a href="pedido.html">Ver mi pedido</a>
+        </div>
+    </footer>
+
+    <!-- Ojo: Usamos ../ para llegar a js/main.js -->
+    <script src="../js/main.js"></script>
+</body>
+</html>

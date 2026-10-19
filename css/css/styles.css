@@ -1,0 +1,312 @@
+/* Importar fuentes de Google (Oswald para títulos, Inter para texto) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Oswald:wght@500;700&display=swap');
+
+/* Variables CSS (Colores de Fogoncito) */
+:root {
+    --fondo-oscuro: #0a0a0a;
+    --fondo-tarjeta: #1a1a1a;
+    --naranja-fuego: #f97316;
+    --amarillo: #facc15;
+    --texto-blanco: #ffffff;
+    --texto-gris: #888888;
+    --fuente-titulo: 'Oswald', sans-serif;
+    --fuente-cuerpo: 'Inter', sans-serif;
+}
+
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--fondo-oscuro);
+    color: var(--texto-blanco);
+    font-family: var(--fuente-cuerpo);
+}
+
+/* Estilos del Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: var(--fondo-oscuro);
+    border-bottom: 2px solid var(--naranja-fuego);
+}
+
+header h1 {
+    font-family: var(--fuente-titulo);
+    color: var(--naranja-fuego);
+    font-size: 2.5rem;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    color: var(--texto-blanco);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: var(--amarillo); /* Estado hover */
+}
+
+/* Secciones y Grillas (Grid) */
+main {
+    padding: 40px;
+}
+
+h2 {
+    font-family: var(--fuente-titulo);
+    color: var(--amarillo);
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+.grilla-productos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive automático */
+    gap: 30px;
+}
+
+/* Tarjeta de Producto */
+.tarjeta-producto {
+    background-color: var(--fondo-tarjeta);
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.tarjeta-producto img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.tarjeta-producto h3 {
+    font-family: var(--fuente-titulo);
+    font-size: 1.5rem;
+}
+
+.tarjeta-producto p {
+    color: var(--texto-gris);
+    font-size: 0.9rem;
+    flex-grow: 1; /* Empuja el precio hacia abajo */
+}
+
+.precio-y-boton {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.precio {
+    font-family: var(--fuente-titulo);
+    color: var(--amarillo); /* Precio destacado (Corrección E1) */
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.btn-agregar {
+    background-color: var(--naranja-fuego);
+    color: var(--fondo-oscuro);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.btn-agregar:hover {
+    background-color: var(--amarillo);
+    transform: scale(1.05); /* Efecto hover */
+}
+
+/* Footer / Carrito Flotante */
+.carrito-flotante {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--naranja-fuego);
+    color: var(--fondo-oscuro);
+    padding: 15px 25px;
+    border-radius: 50px;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.carrito-flotante a {
+    color: var(--fondo-oscuro);
+    text-decoration: none;
+}
+
+/* MEDIA QUERY (Responsive) */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 10px;
+    }
+    main {
+        padding: 20px;
+    }
+    .grilla-productos {
+        grid-template-columns: 1fr; /* Una sola columna en celular */
+    }
+}
+/* ========================================= */
+/* ESTILOS PARA LA PÁGINA DE PEDIDO          */
+/* ========================================= */
+
+.lista-carrito {
+    background-color: var(--fondo-tarjeta);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    min-height: 100px;
+}
+
+/* Estilo de cada fila del carrito */
+.item-carrito {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #333;
+}
+
+.item-carrito:last-child {
+    border-bottom: none;
+}
+
+.item-nombre {
+    font-weight: bold;
+}
+
+.item-precio {
+    color: var(--amarillo);
+    font-family: var(--fuente-titulo);
+    font-size: 1.2rem;
+}
+
+/* Carrito vacío */
+.carrito-vacio {
+    color: var(--texto-gris);
+    text-align: center;
+    padding: 20px;
+}
+
+/* Total a pagar */
+.total-pedido {
+    text-align: right;
+    margin-bottom: 40px;
+    padding-right: 20px;
+}
+
+.total-pedido h3 {
+    font-family: var(--fuente-titulo);
+    font-size: 2rem;
+    color: var(--amarillo);
+}
+
+/* Formulario */
+.formulario-datos {
+    background-color: var(--fondo-tarjeta);
+    border-radius: 15px;
+    padding: 30px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.formulario-datos h2 {
+    margin-bottom: 20px;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.campo label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: var(--texto-blanco);
+}
+
+.campo input {
+    padding: 12px;
+    border-radius: 8px;
+    border: 2px solid #333;
+    background-color: var(--fondo-oscuro);
+    color: var(--texto-blanco);
+    font-size: 1rem;
+    font-family: var(--fuente-cuerpo);
+    transition: border-color 0.3s;
+}
+
+/* Estado focus del input (accesibilidad) */
+.campo input:focus {
+    outline: none;
+    border-color: var(--naranja-fuego);
+}
+
+/* Mensaje de error del formulario */
+.error-mensaje {
+    color: #ff4444;
+    font-size: 0.85rem;
+    margin-top: 5px;
+    min-height: 20px; /* Reserva espacio para que no salte el layout */
+}
+
+/* Info del envío (E4 del feedback) */
+.info-envio {
+    background-color: #2a2a2a;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    color: var(--texto-gris);
+    border-left: 4px solid var(--naranja-fuego);
+}
+
+.info-envio strong {
+    color: var(--amarillo);
+}
+
+/* Botón de confirmar */
+.btn-confirmar {
+    width: 100%;
+    background-color: var(--naranja-fuego);
+    color: var(--fondo-oscuro);
+    border: none;
+    padding: 15px;
+    border-radius: 8px;
+    font-family: var(--fuente-titulo);
+    font-size: 1.3rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-confirmar:hover {
+    background-color: var(--amarillo);
+    transform: scale(1.02);
+}
+
+.btn-confirmar:focus {
+    outline: 3px solid var(--amarillo);
+}

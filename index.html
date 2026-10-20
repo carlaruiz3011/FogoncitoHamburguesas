@@ -4,14 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fogoncito - Hamburguesas</title>
-    
-    <!-- Conexion con el CSS -->
-     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <header>
         <div class="logo">
-            <h1>FOGONCITO</h1> <!-- Único H1 de la página -->
+            <h1>FOGONCITO</h1>
         </div>
         <nav>
             <ul>
@@ -21,24 +19,19 @@
         </nav>
     </header>
 
-    <!-- El <main> ahora está DENTRO del body -->
+    <!-- ACÁ VA EL MAIN, ADENTRO DEL BODY -->
     <main>
         <section id="promociones">
             <h2>🔥 Promociones del día</h2>
-            <div class="grilla-productos" id="contenedor-promos">
-                <!-- JavaScript va a inyectar las tarjetas acá -->
-            </div>
+            <div class="grilla-productos" id="contenedor-promos"></div>
         </section>
 
         <section id="menu-completo">
             <h2>🍔 Menú Completo</h2>
-            <div class="grilla-productos" id="contenedor-menu">
-                <!-- JavaScript va a inyectar las tarjetas acá -->
-            </div>
+            <div class="grilla-productos" id="contenedor-menu"></div>
         </section>
     </main>
 
-    <!-- El <footer> ahora está DENTRO del body -->
     <footer>
         <div class="carrito-flotante">
             <span id="contador-carrito">0</span>
@@ -46,7 +39,7 @@
         </div>
     </footer>
 
-    <!-- Conexion con JS (al final del body, es una buena práctica) -->
+    <!-- EL SCRIPT VA AL FINAL, ANTES DE CERRAR EL BODY -->
     <script src="js/main.js"></script>
 </body>
 </html>

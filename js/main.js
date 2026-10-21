@@ -6,10 +6,18 @@ const menu = [
     { id: 2, nombre: "Brasa Bacon", precio: 11200, descripcion: "Pan de Manteca · Carne · Cheddar x2 · Ketchup · Mostaza · Cebollas caramelizadas · Bacon x3 · Huevo Frito", imagen: "img/brasa-bacon.png", esPromo: false },
     { id: 3, nombre: "Bacon Fogonera", precio: 10800, descripcion: "Pan de Manteca, Carne, Chedae x2, Bacon x3,Huevo Frito, Mil Isla Fogonera", imagen: "img/bacon-fogonera.png", esPromo: false },
     { id: 4,  nombre: "Burger Crunch", precio: 11200, descripcion: "Pan de Manteca, Carne x2, Cheddar x3, Bacon x3, Cebolla Crispy, Salsa Fogonera, ketchup y Mostaza", imagen: "img/burger-crunch.png", esPromo: false },
-    { id: 5, nombre: "2 Cheese Fogon Simple", precio: 17500, descripcion: "2 hamburguesas Cheese Fogon simple con papas incluidas", imagen: "img/promo-cheese-simple.png", esPromo: true },
-    { id: 6, nombre: "2 Cheese Fogon Doble", precio: 22500, descripcion: "2 hamburguesas Cheese Fogon doble con papas incluidas", imagen: "img/promo-cheese-doble.png", esPromo: true },
-    { id: 7, nombre: "2 House Burger Doble", precio: 23000, descripcion: "2 hamburguesas House Burger doble con papas incluidas", imagen: "img/promo-house-burger.png", esPromo: true },
-    { id: 8, nombre: "2 House Burger Simple", precio: 18000, descripcion: "2 hamburguesas House Burger simple con papas incluidas", imagen: "img/promo-house-burger-simple.png", esPromo: true },
+    { id: 5, nombre: "Cheese Fogón" , precio: 9800, descripcion: "Pan de manteca · Carne · Chedar x3 · Ketchup y Mostaza · Cebolla Blanca", imagen: "img/promo-cheese-simple.png", esPromo: falsa },
+    { id: 6, nombre: "Fogo Bonito" , precio: 10800, descripcion: "Pan de manteca · Carne · Chedar x2 · Barbacoa · Bacon x3 · Huevo Frito", imagen: "img/fogo-bonito.png", esPromo: false },
+    { id: 7, nombre: "Fuego Cheese" , precio: 10800, descripcion: "Pan de manteca · Carne · Chedar x2 · Roquefort · Muzza · Queso dambo · Verdeo Picado", imagen: "img/fuego-cheese.png", esPromo: false },
+    { id: 8, nombre: "House Burger" , precio: 10000, descripcion: "Pan de manteca · Carne · Chedar x2 · Huevo Frito · Lechuga y Tomate · Mayonesa Fogoncito", imagen: "img/promo-house-burger.png", esPromo: false },
+    { id: 9, nombre: "La Picanta" , precio: 10500, descripcion: "Pan de manteca · Carne · Queso Dambo x2 · Salsa Picante · Cebolla Crispy", imagen: "img/la-picanta.png", esPromo: false },
+    { id: 10, nombre: "Palta Burger" , precio: 10500, descripcion: "Pan de manteca · Carne · Chedar x2 · Omelet · Palta · Cebolla Morada · Mayonesa · Tomate 1 feta", imagen: "img/palta-burger.png", esPromo: false },
+    { id: 11, nombre: "Parri Huevo" , precio: 9800, descripcion: "Pan de manteca · Carne · Chedar x2 · Mayo de Ajo · Huevo Frito x2", imagen: "img/parri-huevo.png", esPromo: false },
+    { id: 12, nombre: "Richard Fresh" , precio: 11200, descripcion: "Pan de manteca · Carne · Chedar x3 · Bacon x3 · Lechuga y Tomate · Ketchup y Mostaza · Salsa Mil Islas", imagen: "img/richard-fresh.png", esPromo: false },
+    { id: 13, nombre: "2 Cheese Fogon Simple", precio: 17500, descripcion: "2 hamburguesas Cheese Fogon simple con papas incluidas", imagen: "img/promo-cheese-simple.png", esPromo: true },
+    { id: 14, nombre: "2 Cheese Fogon Doble", precio: 22500, descripcion: "2 hamburguesas Cheese Fogon doble con papas incluidas", imagen: "img/promo-cheese-doble.png", esPromo: true },
+    { id: 15, nombre: "2 House Burger Doble", precio: 23000, descripcion: "2 hamburguesas House Burger doble con papas incluidas", imagen: "img/promo-house-burger.png", esPromo: true },
+    { id: 16, nombre: "2 House Burger Simple", precio: 18000, descripcion: "2 hamburguesas House Burger simple con papas incluidas", imagen: "img/promo-house-burger-simple.png", esPromo: true },
 ];
 
 // =================================================================

@@ -1,5 +1,5 @@
 // =================================================================
-// 1. DATOS DEL MENÚ 
+// 1. DATOS DEL MENÚ (Con Bebidas agregadas)
 // =================================================================
 const menu = [
     { id: 1, nombre: "Full Cheese", precio: 11000, descripcion: "Pan de Manteca · Carne x2 · Cheddar x6 · Mayonesa", imagen: "img/full-cheese.png", esPromo: false },
@@ -26,17 +26,32 @@ const menu = [
     { id: 20, nombre: "Cerveza Quilmes 1L", precio: 4500, descripcion: "Cerveza rubia clásica", imagen: "img/quilmes.png", esBebida: true }
 ];
 
-// Variables globales
 let carrito = JSON.parse(localStorage.getItem('carritoFogoncito')) || [];
 const costoEnvio = 1500;
 let opcionEntrega = 'delivery';
 
 // =================================================================
-// 2. LÓGICA DE LA PÁGINA DE INICIO (index.html)
+// FUNCIÓN DE SCROLL (Aseguramos que esté disponible globalmente)
+// =================================================================
+window.scrollA = function(seccionId, boton) {
+    // Cambiar el estado visual del botón
+    const botones = document.querySelectorAll('.btn-filtro');
+    botones.forEach(b => b.classList.remove('activo'));
+    boton.classList.add('activo');
+
+    // Buscar la sección y hacer el scroll
+    const seccion = document.getElementById(seccionId);
+    if (seccion) {
+        seccion.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+};
+
+// =================================================================
+// LÓGICA DE LA PÁGINA DE INICIO
 // =================================================================
 const contenedorPromos = document.getElementById('contenedor-promos');
 const contenedorMenu = document.getElementById('contenedor-menu');
-const contenedorBebidas = document.getElementById('contenedor-bebidas'); // NUEVO
+const contenedorBebidas = document.getElementById('contenedor-bebidas');
 const contadorHTML = document.getElementById('contador-carrito');
 
 function crearTarjeta(producto) {
@@ -58,7 +73,7 @@ function crearTarjeta(producto) {
 if (contenedorPromos && contenedorMenu && contenedorBebidas) {
     menu.forEach(producto => {
         if (producto.esPromo) contenedorPromos.appendChild(crearTarjeta(producto));
-        else if (producto.esBebida) contenedorBebidas.appendChild(crearTarjeta(producto)); // NUEVO
+        else if (producto.esBebida) contenedorBebidas.appendChild(crearTarjeta(producto));
         else contenedorMenu.appendChild(crearTarjeta(producto));
     });
 }
@@ -75,24 +90,10 @@ window.agregarAlCarrito = function(idProducto) {
     alert(`${producto.nombre} agregado al carrito!`);
 }
 
-// NUEVA FUNCIÓN PARA LOS BOTONES DE FILTRO
-window.scrollA = function(seccionId, boton) {
-    // 1. Cambiar el botón activo
-    const botones = document.querySelectorAll('.btn-filtro');
-    botones.forEach(b => b.classList.remove('activo'));
-    boton.classList.add('activo');
-
-    // 2. Hacer scroll suave hacia la sección
-    const seccion = document.getElementById(seccionId);
-    if (seccion) {
-        seccion.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-}
-
 actualizarContador();
 
 // =================================================================
-// 3. LÓGICA DEL CHECKOUT (pages/pedido.html)
+// LÓGICA DEL CHECKOUT
 // =================================================================
 const listaCarritoHTML = document.getElementById('lista-carrito');
 const formCheckout = document.getElementById('form-checkout');
@@ -187,7 +188,7 @@ if (listaCarritoHTML) {
 }
 
 // =================================================================
-// 4. LÓGICA DE CONFIRMACIÓN (pages/confirmacion.html)
+// LÓGICA DE CONFIRMACIÓN
 // =================================================================
 if (document.getElementById('nombre-cliente')) {
     const pedidoData = JSON.parse(localStorage.getItem('datosPedido'));

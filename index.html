@@ -27,10 +27,11 @@
         <p class="hero-descripcion">Elegí tu hamburguesa, personalizá tu pedido y nosotros lo preparamos con fuego.</p>
     </section>
 
+    <!-- BOTONES DE FILTRO CON LA FUNCIÓN scrollA -->
     <div class="filtros">
-        <button class="btn-filtro activo">🍟 PROMOCIONES</button>
-        <button class="btn-filtro">🍔 MENÚ COMPLETO</button>
-        <button class="btn-filtro">🥤 BEBIDAS</button>
+        <button class="btn-filtro activo" onclick="scrollA('promociones', this)">🍟 PROMOCIONES</button>
+        <button class="btn-filtro" onclick="scrollA('menu-completo', this)">🍔 MENÚ COMPLETO</button>
+        <button class="btn-filtro" onclick="scrollA('bebidas', this)">🥤 BEBIDAS</button>
     </div>
 
     <main>
@@ -42,6 +43,12 @@
         <section id="menu-completo">
             <h2>Menú Completo</h2>
             <div class="grilla-productos" id="contenedor-menu"></div>
+        </section>
+
+        <!-- SECCIÓN DE BEBIDAS -->
+        <section id="bebidas">
+            <h2>Bebidas</h2>
+            <div class="grilla-productos" id="contenedor-bebidas"></div>
         </section>
     </main>
 

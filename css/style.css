@@ -106,3 +106,7 @@ h2 { font-family: var(--fuente-titulo); margin-bottom: 20px; font-size: 1.8rem; 
     .fila-inputs, .opciones-grid { flex-direction: column; }
     header { padding: 15px; flex-direction: column; gap: 10px; }
 }
+/* Ajuste para que el scroll no tape los títulos con el header */
+section {
+    scroll-margin-top: 20px;
+}

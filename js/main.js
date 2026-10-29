@@ -1,3 +1,6 @@
+// =================================================================
+// 1. DATOS DEL MENÚ 
+// =================================================================
 const menu = [
     { id: 1, nombre: "Full Cheese", precio: 11000, descripcion: "Pan de Manteca · Carne x2 · Cheddar x6 · Mayonesa", imagen: "img/full-cheese.png", esPromo: false },
     { id: 2, nombre: "Brasa Bacon", precio: 11200, descripcion: "Pan de Manteca · Carne · Cheddar x2 · Ketchup · Mostaza · Cebollas caramelizadas · Bacon x3 · Huevo Frito", imagen: "img/brasa-bacon.png", esPromo: false },
@@ -15,15 +18,25 @@ const menu = [
     { id: 14, nombre: "2 Cheese Fogon Doble", precio: 22500, descripcion: "2 hamburguesas Cheese Fogon doble con papas incluidas", imagen: "img/promo-cheese-doble.png", esPromo: true },
     { id: 15, nombre: "2 House Burger Doble", precio: 23000, descripcion: "2 hamburguesas House Burger doble con papas incluidas", imagen: "img/promo-house-burger.png", esPromo: true },
     { id: 16, nombre: "2 House Burger Simple", precio: 18000, descripcion: "2 hamburguesas House Burger simple con papas incluidas", imagen: "img/promo-house-burger-simple.png", esPromo: true },
+    
+    // --- BEBIDAS ---
+    { id: 17, nombre: "Coca-Cola 500ml", precio: 2500, descripcion: "Gaseosa línea Coca-Cola", imagen: "img/coca.png", esBebida: true },
+    { id: 18, nombre: "Sprite 500ml", precio: 2500, descripcion: "Gaseosa lima limón", imagen: "img/sprite.png", esBebida: true },
+    { id: 19, nombre: "Agua Mineral 500ml", precio: 2000, descripcion: "Agua sin gas", imagen: "img/agua.png", esBebida: true },
+    { id: 20, nombre: "Cerveza Quilmes 1L", precio: 4500, descripcion: "Cerveza rubia clásica", imagen: "img/quilmes.png", esBebida: true }
 ];
 
+// Variables globales
 let carrito = JSON.parse(localStorage.getItem('carritoFogoncito')) || [];
 const costoEnvio = 1500;
 let opcionEntrega = 'delivery';
 
-// --- HOME ---
+// =================================================================
+// 2. LÓGICA DE LA PÁGINA DE INICIO (index.html)
+// =================================================================
 const contenedorPromos = document.getElementById('contenedor-promos');
 const contenedorMenu = document.getElementById('contenedor-menu');
+const contenedorBebidas = document.getElementById('contenedor-bebidas'); // NUEVO
 const contadorHTML = document.getElementById('contador-carrito');
 
 function crearTarjeta(producto) {
@@ -42,9 +55,10 @@ function crearTarjeta(producto) {
     return article;
 }
 
-if (contenedorPromos && contenedorMenu) {
+if (contenedorPromos && contenedorMenu && contenedorBebidas) {
     menu.forEach(producto => {
         if (producto.esPromo) contenedorPromos.appendChild(crearTarjeta(producto));
+        else if (producto.esBebida) contenedorBebidas.appendChild(crearTarjeta(producto)); // NUEVO
         else contenedorMenu.appendChild(crearTarjeta(producto));
     });
 }
@@ -61,9 +75,25 @@ window.agregarAlCarrito = function(idProducto) {
     alert(`${producto.nombre} agregado al carrito!`);
 }
 
+// NUEVA FUNCIÓN PARA LOS BOTONES DE FILTRO
+window.scrollA = function(seccionId, boton) {
+    // 1. Cambiar el botón activo
+    const botones = document.querySelectorAll('.btn-filtro');
+    botones.forEach(b => b.classList.remove('activo'));
+    boton.classList.add('activo');
+
+    // 2. Hacer scroll suave hacia la sección
+    const seccion = document.getElementById(seccionId);
+    if (seccion) {
+        seccion.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}
+
 actualizarContador();
 
-// --- CHECKOUT ---
+// =================================================================
+// 3. LÓGICA DEL CHECKOUT (pages/pedido.html)
+// =================================================================
 const listaCarritoHTML = document.getElementById('lista-carrito');
 const formCheckout = document.getElementById('form-checkout');
 
@@ -82,7 +112,7 @@ if (listaCarritoHTML) {
                 item.innerHTML = `
                     <div class="item-info">
                         <h3>${producto.nombre}</h3>
-                        <p>Simple</p>
+                        <p>${producto.esBebida ? 'Bebida' : 'Simple'}</p>
                     </div>
                     <div class="item-controles">
                         <button type="button" class="btn-cantidad" onclick="modificarCantidad(${index}, -1)">-</button>
@@ -156,7 +186,9 @@ if (listaCarritoHTML) {
     });
 }
 
-// --- CONFIRMACIÓN ---
+// =================================================================
+// 4. LÓGICA DE CONFIRMACIÓN (pages/confirmacion.html)
+// =================================================================
 if (document.getElementById('nombre-cliente')) {
     const pedidoData = JSON.parse(localStorage.getItem('datosPedido'));
     if (pedidoData) {

@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fogoncito - Tu Pedido</title>
-    <!-- Ruta correcta al CSS -->
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-    <!-- Contenedor principal con ancho máximo para que no se estire en PC -->
+
     <div class="checkout-container">
         
         <!-- Header del Checkout -->
@@ -22,21 +21,20 @@
 
         <h2 class="titulo-pagina">Tu pedido</h2>
 
-        <!-- Lista del carrito (Inyectada por JS) -->
+        <!-- Contenedor del Carrito -->
         <div id="lista-carrito"></div>
 
-        <!-- Formulario -->
         <form id="form-checkout">
             
             <!-- Paso 1: Datos personales -->
             <h3 class="seccion-titulo">¿Quién hace el pedido?</h3>
             <div class="fila-inputs">
                 <div class="campo">
-                    <label>Nombre</label>
+                    <label>NOMBRE</label>
                     <input type="text" id="nombre" placeholder="Juan" required>
                 </div>
                 <div class="campo">
-                    <label>Apellido</label>
+                    <label>APELLIDO</label>
                     <input type="text" id="apellido" placeholder="García" required>
                 </div>
             </div>
@@ -56,15 +54,10 @@
                 </div>
             </div>
 
-            <!-- Sección de dirección (oculta si elige retiro) -->
+            <!-- Dirección -->
             <div id="seccion-direccion">
-                <h3 class="seccion-titulo">📍 Dirección de entrega</h3>
                 <div class="campo" style="margin-bottom: 15px;">
                     <input type="text" id="direccion" placeholder="Ej: Pirovano 213" required>
-                </div>
-                <div class="alerta-envio">
-                    🛵 Entrega en: <strong id="texto-direccion">Ingresá tu dirección</strong><br>
-                    <span style="color: var(--texto-gris); font-size: 0.85rem;">Costo de envío: $1.500</span>
                 </div>
             </div>
 
@@ -79,14 +72,6 @@
                 </div>
             </div>
 
-            <!-- Datos de transferencia -->
-            <div id="datos-transferencia" style="background-color: var(--fondo-tarjeta); padding: 20px; border-radius: 12px; margin-top: 15px; font-size: 0.9rem;">
-                <p style="color: var(--amarillo); font-weight: bold; margin-bottom: 10px;">Datos para transferir:</p>
-                <p style="color: var(--texto-gris); margin-bottom: 5px;">CBU: 0000003100123456789012</p>
-                <p style="color: var(--texto-gris); margin-bottom: 5px;">Alias: fogoncito.hamburguer</p>
-                <p style="color: var(--texto-gris);">Titular: Fogoncito SRL</p>
-            </div>
-
             <!-- Resumen de pago -->
             <div class="resumen-pago">
                 <div class="fila-resumen">
@@ -95,7 +80,7 @@
                 </div>
                 <div class="fila-resumen" id="fila-envio">
                     <span>Envío</span>
-                    <span>$1.500</span>
+                    <span id="resumen-envio">$1.500</span>
                 </div>
                 <div class="fila-resumen total">
                     <span>TOTAL</span>
@@ -103,11 +88,13 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn-confirmar">CONFIRMAR PEDIDO →</button>
+            <!-- Botón Confirmar -->
+            <div class="contenedor-boton-confirmar">
+                <button type="submit" class="btn-confirmar">CONFIRMAR PEDIDO →</button>
+            </div>
         </form>
     </div>
 
-    <!-- Script -->
     <script src="../js/main.js"></script>
 </body>
 </html>

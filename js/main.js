@@ -6,7 +6,7 @@ const menu = [
     { id: 2, nombre: "Brasa Bacon", precio: 11200, descripcion: "Pan de Manteca · Carne · Cheddar x2 · Ketchup · Mostaza · Cebollas caramelizadas · Bacon x3 · Huevo Frito", imagen: "img/brasa-bacon.png", esPromo: false },
     { id: 3, nombre: "Bacon Fogonera", precio: 10800, descripcion: "Pan de Manteca, Carne, Chedae x2, Bacon x3,Huevo Frito, Mil Isla Fogonera", imagen: "img/bacon-fogonera.png", esPromo: false },
     { id: 4,  nombre: "Burger Crunch", precio: 11200, descripcion: "Pan de Manteca, Carne x2, Cheddar x3, Bacon x3, Cebolla Crispy, Salsa Fogonera, ketchup y Mostaza", imagen: "img/burger-crunch.png", esPromo: false },
-    { id: 5, nombre: "Cheese Fogón" , precio: 9800, descripcion: "Pan de manteca · Carne · Chedar x3 · Ketchup y Mostaza · Cebolla Blanca", imagen: "img/promo-cheese-simple.png", esPromo: falsa },
+    { id: 5, nombre: "Cheese Fogón" , precio: 9800, descripcion: "Pan de manteca · Carne · Chedar x3 · Ketchup y Mostaza · Cebolla Blanca", imagen: "img/promo-cheese-simple.png", esPromo: false },
     { id: 6, nombre: "Fogo Bonito" , precio: 10800, descripcion: "Pan de manteca · Carne · Chedar x2 · Barbacoa · Bacon x3 · Huevo Frito", imagen: "img/fogo-bonito.png", esPromo: false },
     { id: 7, nombre: "Fuego Cheese" , precio: 10800, descripcion: "Pan de manteca · Carne · Chedar x2 · Roquefort · Muzza · Queso dambo · Verdeo Picado", imagen: "img/fuego-cheese.png", esPromo: false },
     { id: 8, nombre: "House Burger" , precio: 10000, descripcion: "Pan de manteca · Carne · Chedar x2 · Huevo Frito · Lechuga y Tomate · Mayonesa Fogoncito", imagen: "img/promo-house-burger.png", esPromo: false },
@@ -128,7 +128,7 @@ if (listaCarritoHTML) {
         // Limpiamos errores previos
         document.getElementById('error-nombre').textContent = '';
         document.getElementById('error-direccion').textContent = '';
-        document.getElementById('error-telefono').textContent = ''; // CORREGIDO: Ahora coincide con el ID del HTML
+        document.getElementById('error-telefono').textContent = '';
         
         const nombre = document.getElementById('nombre').value.trim();
         const direccion = document.getElementById('direccion').value.trim();

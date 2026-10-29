@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fogoncito - Tu Pedido</title>
+    <!-- Ruta correcta al CSS -->
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
+    <!-- Contenedor principal con ancho máximo para que no se estire en PC -->
     <div class="checkout-container">
+        
         <!-- Header del Checkout -->
         <div class="checkout-header">
             <a href="../index.html" class="btn-volver">← Volver</a>
@@ -17,13 +20,15 @@
             </div>
         </div>
 
-        <h2 style="font-family: var(--fuente-titulo); font-size: 2.5rem; margin-bottom: 30px;">Tu pedido</h2>
+        <h2 class="titulo-pagina">Tu pedido</h2>
 
         <!-- Lista del carrito (Inyectada por JS) -->
         <div id="lista-carrito"></div>
 
         <!-- Formulario -->
         <form id="form-checkout">
+            
+            <!-- Paso 1: Datos personales -->
             <h3 class="seccion-titulo">¿Quién hace el pedido?</h3>
             <div class="fila-inputs">
                 <div class="campo">
@@ -36,6 +41,7 @@
                 </div>
             </div>
 
+            <!-- Paso 2: Método de entrega -->
             <h3 class="seccion-titulo">¿Cómo lo querés?</h3>
             <div class="opciones-grid">
                 <div class="opcion-card seleccionado" onclick="seleccionarOpcion(this, 'delivery')">
@@ -57,11 +63,12 @@
                     <input type="text" id="direccion" placeholder="Ej: Pirovano 213" required>
                 </div>
                 <div class="alerta-envio">
-                    🛵 Entrega en: <strong id="texto-direccion">Pirovano 213</strong><br>
+                    🛵 Entrega en: <strong id="texto-direccion">Ingresá tu dirección</strong><br>
                     <span style="color: var(--texto-gris); font-size: 0.85rem;">Costo de envío: $1.500</span>
                 </div>
             </div>
 
+            <!-- Paso 3: Método de pago -->
             <h3 class="seccion-titulo">¿Cómo querés pagar?</h3>
             <div class="opciones-grid" style="flex-direction: column; gap: 10px;">
                 <div class="opcion-card" onclick="seleccionarOpcion(this, 'tarjeta')">
@@ -72,7 +79,7 @@
                 </div>
             </div>
 
-            <!-- Datos de transferencia (oculto si elige tarjeta) -->
+            <!-- Datos de transferencia -->
             <div id="datos-transferencia" style="background-color: var(--fondo-tarjeta); padding: 20px; border-radius: 12px; margin-top: 15px; font-size: 0.9rem;">
                 <p style="color: var(--amarillo); font-weight: bold; margin-bottom: 10px;">Datos para transferir:</p>
                 <p style="color: var(--texto-gris); margin-bottom: 5px;">CBU: 0000003100123456789012</p>
@@ -100,6 +107,7 @@
         </form>
     </div>
 
+    <!-- Script -->
     <script src="../js/main.js"></script>
 </body>
 </html>

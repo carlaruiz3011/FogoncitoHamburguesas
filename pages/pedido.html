@@ -7,10 +7,7 @@
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-
     <div class="checkout-container">
-        
-        <!-- Header del Checkout -->
         <div class="checkout-header">
             <a href="../index.html" class="btn-volver">← Volver</a>
             <div class="logo">
@@ -20,13 +17,9 @@
         </div>
 
         <h2 class="titulo-pagina">Tu pedido</h2>
-
-        <!-- Contenedor del Carrito -->
         <div id="lista-carrito"></div>
 
         <form id="form-checkout">
-            
-            <!-- Paso 1: Datos personales -->
             <h3 class="seccion-titulo">¿Quién hace el pedido?</h3>
             <div class="fila-inputs">
                 <div class="campo">
@@ -39,7 +32,6 @@
                 </div>
             </div>
 
-            <!-- Paso 2: Método de entrega -->
             <h3 class="seccion-titulo">¿Cómo lo querés?</h3>
             <div class="opciones-grid">
                 <div class="opcion-card seleccionado" onclick="seleccionarOpcion(this, 'delivery')">
@@ -54,14 +46,12 @@
                 </div>
             </div>
 
-            <!-- Dirección -->
             <div id="seccion-direccion">
                 <div class="campo" style="margin-bottom: 15px;">
                     <input type="text" id="direccion" placeholder="Ej: Pirovano 213" required>
                 </div>
             </div>
 
-            <!-- Paso 3: Método de pago -->
             <h3 class="seccion-titulo">¿Cómo querés pagar?</h3>
             <div class="opciones-grid" style="flex-direction: column; gap: 10px;">
                 <div class="opcion-card" onclick="seleccionarOpcion(this, 'tarjeta')">
@@ -72,7 +62,6 @@
                 </div>
             </div>
 
-            <!-- Resumen de pago -->
             <div class="resumen-pago">
                 <div class="fila-resumen">
                     <span>Subtotal</span>
@@ -88,13 +77,11 @@
                 </div>
             </div>
 
-            <!-- Botón Confirmar -->
             <div class="contenedor-boton-confirmar">
                 <button type="submit" class="btn-confirmar">CONFIRMAR PEDIDO →</button>
             </div>
         </form>
     </div>
-
     <script src="../js/main.js"></script>
 </body>
 </html>

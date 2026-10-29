@@ -1,6 +1,3 @@
-// =================================================================
-// 1. DATOS DEL MENÚ (Array completo restaurado)
-// =================================================================
 const menu = [
     { id: 1, nombre: "Full Cheese", precio: 11000, descripcion: "Pan de Manteca · Carne x2 · Cheddar x6 · Mayonesa", imagen: "img/full-cheese.png", esPromo: false },
     { id: 2, nombre: "Brasa Bacon", precio: 11200, descripcion: "Pan de Manteca · Carne · Cheddar x2 · Ketchup · Mostaza · Cebollas caramelizadas · Bacon x3 · Huevo Frito", imagen: "img/brasa-bacon.png", esPromo: false },
@@ -20,14 +17,11 @@ const menu = [
     { id: 16, nombre: "2 House Burger Simple", precio: 18000, descripcion: "2 hamburguesas House Burger simple con papas incluidas", imagen: "img/promo-house-burger-simple.png", esPromo: true },
 ];
 
-// Variables globales
 let carrito = JSON.parse(localStorage.getItem('carritoFogoncito')) || [];
 const costoEnvio = 1500;
-let opcionEntrega = 'delivery'; // 'delivery' o 'retiro'
+let opcionEntrega = 'delivery';
 
-// =================================================================
-// 2. LÓGICA DE LA PÁGINA DE INICIO (index.html)
-// =================================================================
+// --- HOME ---
 const contenedorPromos = document.getElementById('contenedor-promos');
 const contenedorMenu = document.getElementById('contenedor-menu');
 const contadorHTML = document.getElementById('contador-carrito');
@@ -67,29 +61,24 @@ window.agregarAlCarrito = function(idProducto) {
     alert(`${producto.nombre} agregado al carrito!`);
 }
 
-// Inicializar contador al cargar
 actualizarContador();
 
-// =================================================================
-// 3. LÓGICA DEL CHECKOUT (pages/pedido.html)
-// =================================================================
+// --- CHECKOUT ---
 const listaCarritoHTML = document.getElementById('lista-carrito');
 const formCheckout = document.getElementById('form-checkout');
 
 if (listaCarritoHTML) {
-    
     function renderizarCarrito() {
         listaCarritoHTML.innerHTML = '';
         let subtotal = 0;
 
         if (carrito.length === 0) {
-            listaCarritoHTML.innerHTML = '<p style="color: var(--texto-gris); text-align:center; padding: 20px;">Tu carrito está vacío. ¡Volvé al menú para elegir algo rico! 🍔</p>';
+            listaCarritoHTML.innerHTML = '<p style="color: var(--texto-gris); text-align:center; padding: 20px;">Tu carrito está vacío.</p>';
         } else {
             carrito.forEach((producto, index) => {
                 const item = document.createElement('div');
                 item.classList.add('item-carrito');
                 const precioFormateado = new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(producto.precio);
-                
                 item.innerHTML = `
                     <div class="item-info">
                         <h3>${producto.nombre}</h3>
@@ -134,25 +123,13 @@ if (listaCarritoHTML) {
         if (tipo === 'delivery' || tipo === 'retiro') {
             opcionEntrega = tipo;
             document.getElementById('seccion-direccion').style.display = tipo === 'retiro' ? 'none' : 'block';
-            renderizarCarrito(); // Recalcular totales
-        }
-        
-        // Si selecciona transferencia, mostramos los datos (opcional, según el Figma)
-        if (tipo === 'tarjeta' || tipo === 'transferencia') {
-            const datosTransf = document.getElementById('datos-transferencia');
-            if (datosTransf) {
-                datosTransf.style.display = tipo === 'transferencia' ? 'block' : 'none';
-            }
+            renderizarCarrito();
         }
     };
 
     window.modificarCantidad = function(index, cambio) {
-        if (cambio === -1) {
-            carrito.splice(index, 1);
-        }
-        if (cambio === 1) {
-            carrito.push({...carrito[index]});
-        }
+        if (cambio === -1) carrito.splice(index, 1);
+        if (cambio === 1) carrito.push({...carrito[index]});
         localStorage.setItem('carritoFogoncito', JSON.stringify(carrito));
         renderizarCarrito();
         actualizarContador();
@@ -162,36 +139,26 @@ if (listaCarritoHTML) {
 
     formCheckout.addEventListener('submit', function(e) {
         e.preventDefault();
-        if (carrito.length === 0) {
-            alert('El carrito está vacío. Agregá productos antes de confirmar.');
-            return;
-        }
+        if (carrito.length === 0) return alert('El carrito está vacío.');
         
         const nombre = document.getElementById('nombre').value;
         const apellido = document.getElementById('apellido').value;
-        const direccionInput = document.getElementById('direccion');
-        const direccion = direccionInput ? direccionInput.value : '';
+        const direccion = document.getElementById('direccion') ? document.getElementById('direccion').value : '';
 
         const pedidoData = {
             cliente: `${nombre} ${apellido}`,
-            direccion: opcionEntrega === 'delivery' ? direccion : 'Pasa a retirar al local',
+            direccion: opcionEntrega === 'delivery' ? direccion : 'Retiro en local',
             total: document.getElementById('resumen-total').textContent
         };
-        
         localStorage.setItem('datosPedido', JSON.stringify(pedidoData));
         localStorage.removeItem('carritoFogoncito');
         window.location.href = 'confirmacion.html';
     });
 }
 
-// =================================================================
-// 4. LÓGICA DE CONFIRMACIÓN (pages/confirmacion.html)
-// =================================================================
-const nombreClienteHTML = document.getElementById('nombre-cliente');
-
-if (nombreClienteHTML) {
+// --- CONFIRMACIÓN ---
+if (document.getElementById('nombre-cliente')) {
     const pedidoData = JSON.parse(localStorage.getItem('datosPedido'));
-    
     if (pedidoData) {
         document.getElementById('nombre-cliente').textContent = pedidoData.cliente;
         document.getElementById('direccion-cliente').textContent = pedidoData.direccion;

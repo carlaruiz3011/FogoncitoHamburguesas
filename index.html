@@ -15,13 +15,13 @@
         </div>
         <nav>
             <ul>
-                <!-- El botón de Mi Pedido ahora tiene estilo de botón -->
+                <li><a href="index.html" class="nav-link">Inicio</a></li>
                 <li><a href="pages/pedido.html" class="btn-header">🛒 Mi pedido</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- HERO SECTION (Nuevo, según Figma) -->
+    <!-- HERO SECTION (La parte del medio de la Foto 2) -->
     <section class="hero">
         <div class="hero-iconos">🔥 🔥 🔥</div>
         <h1 class="hero-titulo">FOGONCITO</h1>
@@ -29,11 +29,11 @@
         <p class="hero-descripcion">Elegí tu hamburguesa, personalizá tu pedido y nosotros lo preparamos con fuego.</p>
     </section>
 
-    <!-- FILTROS / BOTONES DE CATEGORÍA (Nuevo, según Figma) -->
+    <!-- FILTROS -->
     <div class="filtros">
-        <button class="btn-filtro activo">🍟 PROMOCIONES</button>
-        <button class="btn-filtro">🍔 MENÚ COMPLETO</button>
-        <button class="btn-filtro">🥤 BEBIDAS</button>
+        <button class="btn-filtro activo" onclick="filtrar('promos')">🍟 PROMOCIONES</button>
+        <button class="btn-filtro" onclick="filtrar('menu')">🍔 MENÚ COMPLETO</button>
+        <button class="btn-filtro" onclick="filtrar('bebidas')">🥤 BEBIDAS</button>
     </div>
 
     <!-- MAIN -->
@@ -49,7 +49,6 @@
         </section>
     </main>
 
-    <!-- FOOTER / CARRITO FLOTANTE -->
     <footer>
         <div class="carrito-flotante">
             <span id="contador-carrito">0</span>

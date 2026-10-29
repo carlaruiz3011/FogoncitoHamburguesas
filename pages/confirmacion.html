@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fogoncito - Pedido Confirmado</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="confirmacion-container">
+        <h1 class="confirmacion-titulo">¡TOMADO!</h1>
+        <p class="confirmacion-sub">Gracias, <span id="nombre-cliente">Carla Ruiz</span></p>
+
+        <div class="card-entrega">
+            <span style="font-size: 2rem;">🛵</span>
+            <p style="margin-top: 10px; font-weight: bold;">Tu pedido llegará en</p>
+            <div class="entrega-tiempo">34 <span>min</span></div>
+            <p style="color: var(--texto-gris); font-size: 0.9rem;">Entregando en: <span id="direccion-cliente" style="color: white;">Pirovano 213</span></p>
+            
+            <div style="border-top: 1px solid #333; margin-top: 20px; padding-top: 20px; display: flex; justify-content: space-between;">
+                <div style="text-align: left;">
+                    <p style="color: var(--texto-gris); font-size: 0.8rem;">Pago</p>
+                    <p style="font-weight: bold; font-size: 0.9rem;">🏦 Transferencia</p>
+                </div>
+                <div style="text-align: right;">
+                    <p style="color: var(--texto-gris); font-size: 0.8rem;">Total</p>
+                    <p style="color: var(--amarillo); font-weight: bold; font-family: var(--fuente-titulo); font-size: 1.2rem;" id="total-cliente">$11.500</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="alerta-fuego">
+            🔥 ¡Las hamburguesas de Fogoncito siempre salen bien calientes!
+        </div>
+
+        <a href="../index.html" class="btn-secundario">HACER OTRO PEDIDO</a>
+    </div>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

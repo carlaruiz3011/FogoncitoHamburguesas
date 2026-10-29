@@ -4,85 +4,102 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fogoncito - Tu Pedido</title>
-    <!-- Ojo: Usamos ../ para salir de la carpeta pages y llegar a css -->
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-
-    <!-- HEADER (igual al del index, pero con rutas relativas) -->
-    <header>
-        <div class="logo">
-            <h1>FOGONCITO</h1>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="../index.html">Inicio</a></li>
-                <li><a href="pedido.html">Mi Pedido</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <!-- CONTENIDO PRINCIPAL -->
-    <main>
-        <h2>Tu Pedido</h2>
-
-        <!-- Acá JavaScript va a inyectar los items del carrito -->
-        <div id="lista-carrito" class="lista-carrito">
-            <!-- Ejemplo de lo que se va a inyectar:
-            <div class="item-carrito">
-                <span class="item-nombre">Full Cheese</span>
-                <span class="item-precio">$11.000</span>
+    <div class="checkout-container">
+        <!-- Header del Checkout -->
+        <div class="checkout-header">
+            <a href="../index.html" class="btn-volver">← Volver</a>
+            <div class="logo">
+                <span class="logo-icon">🔥</span>
+                <h1>FOGONCITO</h1>
             </div>
-            -->
         </div>
 
-        <!-- Total a pagar -->
-        <div class="total-pedido">
-            <h3>Total: <span id="total">$0</span></h3>
-        </div>
+        <h2 style="font-family: var(--fuente-titulo); font-size: 2.5rem; margin-bottom: 30px;">Tu pedido</h2>
 
-        <!-- FORMULARIO DE DATOS DE ENVÍO -->
-        <section class="formulario-datos">
-            <h2>Datos de Envío</h2>
-            <form id="form-pedido" novalidate>
-                
+        <!-- Lista del carrito (Inyectada por JS) -->
+        <div id="lista-carrito"></div>
+
+        <!-- Formulario -->
+        <form id="form-checkout">
+            <h3 class="seccion-titulo">¿Quién hace el pedido?</h3>
+            <div class="fila-inputs">
                 <div class="campo">
-                    <label for="nombre">Nombre completo:</label>
-                    <input type="text" id="nombre" name="nombre" placeholder="Ej: Laura Gómez" required>
-                    <span class="error-mensaje" id="error-nombre"></span>
+                    <label>Nombre</label>
+                    <input type="text" id="nombre" placeholder="Juan" required>
                 </div>
-
                 <div class="campo">
-                    <label for="direccion">Dirección de entrega:</label>
-                    <input type="text" id="direccion" name="direccion" placeholder="Ej: San Martín 123, Mendoza" required>
-                    <span class="error-mensaje" id="error-direccion"></span>
+                    <label>Apellido</label>
+                    <input type="text" id="apellido" placeholder="García" required>
                 </div>
+            </div>
 
-                <div class="campo">
-                    <label for="telefono">Teléfono:</label>
-                    <input type="tel" id="telefono" name="telefono" placeholder="Ej: 2615551234" required>
-                    <span class="error-mensaje" id="error-telefono"></span>
+            <h3 class="seccion-titulo">¿Cómo lo querés?</h3>
+            <div class="opciones-grid">
+                <div class="opcion-card seleccionado" onclick="seleccionarOpcion(this, 'delivery')">
+                    <span class="icono">🛵</span>
+                    <h4>Delivery</h4>
+                    <p>Envío: $1.500</p>
                 </div>
+                <div class="opcion-card" onclick="seleccionarOpcion(this, 'retiro')">
+                    <span class="icono">🏪</span>
+                    <h4>Pasa a retirar</h4>
+                    <p>Sin costo de envío</p>
+                </div>
+            </div>
 
-                <!-- CORRECCIÓN E4 del feedback: Aclarar el costo de envío -->
-                <p class="info-envio">
-                    🛵 Envío: <strong>$500</strong> (Gratis en compras mayores a $20.000)
-                </p>
+            <!-- Sección de dirección (oculta si elige retiro) -->
+            <div id="seccion-direccion">
+                <h3 class="seccion-titulo">📍 Dirección de entrega</h3>
+                <div class="campo" style="margin-bottom: 15px;">
+                    <input type="text" id="direccion" placeholder="Ej: Pirovano 213" required>
+                </div>
+                <div class="alerta-envio">
+                    🛵 Entrega en: <strong id="texto-direccion">Pirovano 213</strong><br>
+                    <span style="color: var(--texto-gris); font-size: 0.85rem;">Costo de envío: $1.500</span>
+                </div>
+            </div>
 
-                <button type="submit" class="btn-confirmar">CONFIRMAR PEDIDO</button>
-            </form>
-        </section>
-    </main>
+            <h3 class="seccion-titulo">¿Cómo querés pagar?</h3>
+            <div class="opciones-grid" style="flex-direction: column; gap: 10px;">
+                <div class="opcion-card" onclick="seleccionarOpcion(this, 'tarjeta')">
+                    <h4>💳 Tarjeta de crédito/débito</h4>
+                </div>
+                <div class="opcion-card seleccionado" onclick="seleccionarOpcion(this, 'transferencia')">
+                    <h4>🏦 Transferencia bancaria</h4>
+                </div>
+            </div>
 
-    <!-- FOOTER -->
-    <footer>
-        <div class="carrito-flotante">
-            <span id="contador-carrito">0</span>
-            <a href="pedido.html">Ver mi pedido</a>
-        </div>
-    </footer>
+            <!-- Datos de transferencia (oculto si elige tarjeta) -->
+            <div id="datos-transferencia" style="background-color: var(--fondo-tarjeta); padding: 20px; border-radius: 12px; margin-top: 15px; font-size: 0.9rem;">
+                <p style="color: var(--amarillo); font-weight: bold; margin-bottom: 10px;">Datos para transferir:</p>
+                <p style="color: var(--texto-gris); margin-bottom: 5px;">CBU: 0000003100123456789012</p>
+                <p style="color: var(--texto-gris); margin-bottom: 5px;">Alias: fogoncito.hamburguer</p>
+                <p style="color: var(--texto-gris);">Titular: Fogoncito SRL</p>
+            </div>
 
-    <!-- Ojo: Usamos ../ para llegar a js/main.js -->
+            <!-- Resumen de pago -->
+            <div class="resumen-pago">
+                <div class="fila-resumen">
+                    <span>Subtotal</span>
+                    <span id="resumen-subtotal">$0</span>
+                </div>
+                <div class="fila-resumen" id="fila-envio">
+                    <span>Envío</span>
+                    <span>$1.500</span>
+                </div>
+                <div class="fila-resumen total">
+                    <span>TOTAL</span>
+                    <span id="resumen-total">$0</span>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-confirmar">CONFIRMAR PEDIDO →</button>
+        </form>
+    </div>
+
     <script src="../js/main.js"></script>
 </body>
 </html>

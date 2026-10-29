@@ -1,40 +1,35 @@
 // =================================================================
-// 1. DATOS DEL MENÚ (Array de objetos)
+// 1. DATOS DEL MENÚ
 // =================================================================
 const menu = [
     { id: 1, nombre: "Full Cheese", precio: 11000, descripcion: "Pan de Manteca · Carne x2 · Cheddar x6 · Mayonesa", imagen: "img/full-cheese.png", esPromo: false },
-    { id: 2, nombre: "Brasa Bacon", precio: 11200, descripcion: "Pan de Manteca · Carne · Cheddar x2 · Ketchup · Mostaza · Cebollas caramelizadas · Bacon x3 · Huevo Frito", imagen: "img/brasa-bacon.png", esPromo: false },
+    { id: 2, nombre: "Brasa Bacon", precio: 10000, descripcion: "Pan de Manteca · Carne · Cheddar x2 · Ketchup · Mostaza · Cebollas caramelizadas · Bacon x3 · Huevo Frito", imagen: "img/brasa-bacon.png", esPromo: false },
     { id: 3, nombre: "Bacon Fogonera", precio: 10800, descripcion: "Pan de Manteca, Carne, Chedae x2, Bacon x3,Huevo Frito, Mil Isla Fogonera", imagen: "img/bacon-fogonera.png", esPromo: false },
-    { id: 4,  nombre: "Burger Crunch", precio: 11200, descripcion: "Pan de Manteca, Carne x2, Cheddar x3, Bacon x3, Cebolla Crispy, Salsa Fogonera, ketchup y Mostaza", imagen: "img/burger-crunch.png", esPromo: false },
-    { id: 5, nombre: "Cheese Fogón" , precio: 9800, descripcion: "Pan de manteca · Carne · Chedar x3 · Ketchup y Mostaza · Cebolla Blanca", imagen: "img/promo-cheese-simple.png", esPromo: false },
-    { id: 6, nombre: "Fogo Bonito" , precio: 10800, descripcion: "Pan de manteca · Carne · Chedar x2 · Barbacoa · Bacon x3 · Huevo Frito", imagen: "img/fogo-bonito.png", esPromo: false },
-    { id: 7, nombre: "Fuego Cheese" , precio: 10800, descripcion: "Pan de manteca · Carne · Chedar x2 · Roquefort · Muzza · Queso dambo · Verdeo Picado", imagen: "img/fuego-cheese.png", esPromo: false },
-    { id: 8, nombre: "House Burger" , precio: 10000, descripcion: "Pan de manteca · Carne · Chedar x2 · Huevo Frito · Lechuga y Tomate · Mayonesa Fogoncito", imagen: "img/promo-house-burger.png", esPromo: false },
-    { id: 9, nombre: "La Picanta" , precio: 10500, descripcion: "Pan de manteca · Carne · Queso Dambo x2 · Salsa Picante · Cebolla Crispy", imagen: "img/la-picanta.png", esPromo: false },
-    { id: 10, nombre: "Palta Burger" , precio: 10500, descripcion: "Pan de manteca · Carne · Chedar x2 · Omelet · Palta · Cebolla Morada · Mayonesa · Tomate 1 feta", imagen: "img/palta-burger.png", esPromo: false },
-    { id: 11, nombre: "Parri Huevo" , precio: 9800, descripcion: "Pan de manteca · Carne · Chedar x2 · Mayo de Ajo · Huevo Frito x2", imagen: "img/parri-huevo.png", esPromo: false },
-    { id: 12, nombre: "Richard Fresh" , precio: 11200, descripcion: "Pan de manteca · Carne · Chedar x3 · Bacon x3 · Lechuga y Tomate · Ketchup y Mostaza · Salsa Mil Islas", imagen: "img/richard-fresh.png", esPromo: false },
+    { id: 4, nombre: "Burger Crunch", precio: 11200, descripcion: "Pan de Manteca, Carne x2, Cheddar x3, Bacon x3, Cebolla Crispy, Salsa Fogonera, ketchup y Mostaza", imagen: "img/burger-crunch.png", esPromo: false },
+    { id: 5, nombre: "Cheese Fogón", precio: 9800, descripcion: "Pan de manteca · Carne · Chedar x3 · Ketchup y Mostaza · Cebolla Blanca", imagen: "img/promo-cheese-simple.png", esPromo: false },
     { id: 13, nombre: "2 Cheese Fogon Simple", precio: 17500, descripcion: "2 hamburguesas Cheese Fogon simple con papas incluidas", imagen: "img/promo-cheese-simple.png", esPromo: true },
     { id: 14, nombre: "2 Cheese Fogon Doble", precio: 22500, descripcion: "2 hamburguesas Cheese Fogon doble con papas incluidas", imagen: "img/promo-cheese-doble.png", esPromo: true },
-    { id: 15, nombre: "2 House Burger Doble", precio: 23000, descripcion: "2 hamburguesas House Burger doble con papas incluidas", imagen: "img/promo-house-burger.png", esPromo: true },
-    { id: 16, nombre: "2 House Burger Simple", precio: 18000, descripcion: "2 hamburguesas House Burger simple con papas incluidas", imagen: "img/promo-house-burger-simple.png", esPromo: true },
+    { id: 15, nombre: "2 House Burger Doble", precio: 23000, descripcion: "2 hamburguesas House Burger doble con papas incluidas", imagen: "img/promo-house-burger.png", esPromo: true }
 ];
+
+// Variables globales
+let carrito = JSON.parse(localStorage.getItem('carritoFogoncito')) || [];
+const costoEnvio = 1500;
+let opcionEntrega = 'delivery'; // 'delivery' o 'retiro'
 
 // =================================================================
 // 2. LÓGICA DE LA PÁGINA DE INICIO (index.html)
 // =================================================================
-
 const contenedorPromos = document.getElementById('contenedor-promos');
 const contenedorMenu = document.getElementById('contenedor-menu');
 const contadorHTML = document.getElementById('contador-carrito');
 
-// Función para crear una tarjeta HTML
 function crearTarjeta(producto) {
     const article = document.createElement('article');
     article.classList.add('tarjeta-producto');
     const precioFormateado = new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(producto.precio);
     article.innerHTML = `
-        <img src="${producto.imagen}" alt="Hamburguesa ${producto.nombre}">
+        <img src="${producto.imagen}" alt="${producto.nombre}">
         <h3>${producto.nombre}</h3>
         <p>${producto.descripcion}</p>
         <div class="precio-y-boton">
@@ -45,24 +40,15 @@ function crearTarjeta(producto) {
     return article;
 }
 
-// Recorremos el array y mostramos las tarjetas en el lugar correcto
 if (contenedorPromos && contenedorMenu) {
     menu.forEach(producto => {
-        if (producto.esPromo) {
-            contenedorPromos.appendChild(crearTarjeta(producto));
-        } else {
-            contenedorMenu.appendChild(crearTarjeta(producto));
-        }
+        if (producto.esPromo) contenedorPromos.appendChild(crearTarjeta(producto));
+        else contenedorMenu.appendChild(crearTarjeta(producto));
     });
 }
 
-// Lógica del Carrito
-let carrito = JSON.parse(localStorage.getItem('carritoFogoncito')) || [];
-
 function actualizarContador() {
-    if (contadorHTML) {
-        contadorHTML.textContent = carrito.length;
-    }
+    if (contadorHTML) contadorHTML.textContent = carrito.length;
 }
 
 function agregarAlCarrito(idProducto) {
@@ -70,106 +56,154 @@ function agregarAlCarrito(idProducto) {
     carrito.push(producto);
     localStorage.setItem('carritoFogoncito', JSON.stringify(carrito));
     actualizarContador();
-    alert(`${producto.nombre} agregado al carrito!`);
 }
 
-// Llamamos a la función al cargar la página para mostrar el contador guardado
-actualizarContador();
-
-
 // =================================================================
-// 3. LÓGICA DE LA PÁGINA DE PEDIDO (pages/pedido.html)
+// 3. LÓGICA DEL CHECKOUT (pedido.html)
 // =================================================================
-
 const listaCarritoHTML = document.getElementById('lista-carrito');
+const formCheckout = document.getElementById('form-checkout');
 
 if (listaCarritoHTML) {
-    let carritoGuardado = JSON.parse(localStorage.getItem('carritoFogoncito')) || [];
-    let total = 0;
+    // Función para renderizar el carrito
+    function renderizarCarrito() {
+        listaCarritoHTML.innerHTML = '';
+        let subtotal = 0;
 
-    function mostrarCarrito() {
-        listaCarritoHTML.innerHTML = ''; // Limpiamos la lista
-        total = 0;
-
-        if (carritoGuardado.length === 0) {
-            listaCarritoHTML.innerHTML = '<p class="carrito-vacio">Tu carrito está vacío. ¡Volvé al menú para elegir algo rico! 🍔</p>';
+        if (carrito.length === 0) {
+            listaCarritoHTML.innerHTML = '<p style="color: var(--texto-gris); text-align:center; padding: 20px;">Tu carrito está vacío. ¡Volvé al menú!</p>';
         } else {
-            carritoGuardado.forEach(producto => {
+            carrito.forEach((producto, index) => {
                 const item = document.createElement('div');
                 item.classList.add('item-carrito');
                 const precioFormateado = new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(producto.precio);
                 item.innerHTML = `
-                    <span class="item-nombre">${producto.nombre}</span>
-                    <span class="item-precio">${precioFormateado}</span>
+                    <div class="item-info">
+                        <h3>${producto.nombre}</h3>
+                        <p>Simple</p>
+                    </div>
+                    <div class="item-controles">
+                        <button type="button" class="btn-cantidad" onclick="modificarCantidad(${index}, -1)">-</button>
+                        <span>1</span>
+                        <button type="button" class="btn-cantidad" onclick="modificarCantidad(${index}, 1)">+</button>
+                    </div>
+                    <div class="item-precio">${precioFormateado}</div>
                 `;
                 listaCarritoHTML.appendChild(item);
-                total += producto.precio;
+                subtotal += producto.precio;
             });
         }
 
-        const totalFormateado = new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(total);
-        document.getElementById('total').textContent = totalFormateado;
+        actualizarResumen(subtotal);
+    }
+
+    // Función para actualizar los totales
+    function actualizarResumen(subtotal) {
+        const envio = opcionEntrega === 'delivery' ? costoEnvio : 0;
+        const total = subtotal + envio;
+
+        const formatear = (num) => new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(num);
+
+        document.getElementById('resumen-subtotal').textContent = formatear(subtotal);
+        document.getElementById('resumen-total').textContent = formatear(total);
         
-        // Actualizamos el contador del footer
-        const contadorPedido = document.getElementById('contador-carrito');
-        if (contadorPedido) {
-            contadorPedido.textContent = carritoGuardado.length;
+        const filaEnvio = document.getElementById('fila-envio');
+        if (opcionEntrega === 'delivery') {
+            filaEnvio.style.display = 'flex';
+            filaEnvio.innerHTML = `<span>Envío</span><span>${formatear(costoEnvio)}</span>`;
+        } else {
+            filaEnvio.style.display = 'none';
+        }
+
+        // Actualizar el texto de la dirección si estamos en delivery
+        const inputDireccion = document.getElementById('direccion');
+        if (inputDireccion) {
+            inputDireccion.addEventListener('input', (e) => {
+                document.getElementById('texto-direccion').textContent = e.target.value || 'Ingresá tu dirección';
+            });
         }
     }
 
-    mostrarCarrito(); // Mostramos el carrito al cargar la página
+    // Lógica para cambiar entre Delivery y Retiro
+    window.seleccionarOpcion = function(elemento, tipo) {
+        // Quitar la clase 'seleccionado' a los hermanos
+        const contenedor = elemento.parentElement;
+        contenedor.querySelectorAll('.opcion-card').forEach(card => card.classList.remove('seleccionado'));
+        elemento.classList.add('seleccionado');
 
-    // Validación y envío del formulario
-    const formulario = document.getElementById('form-pedido');
+        if (tipo === 'delivery' || tipo === 'retiro') {
+            opcionEntrega = tipo;
+            const seccionDireccion = document.getElementById('seccion-direccion');
+            if (tipo === 'retiro') {
+                seccionDireccion.style.display = 'none';
+            } else {
+                seccionDireccion.style.display = 'block';
+            }
+            renderizarCarrito(); // Recalcular totales
+        }
 
-    formulario.addEventListener('submit', function(evento) {
-        evento.preventDefault();
-        
-        // Limpiamos errores previos
-        document.getElementById('error-nombre').textContent = '';
-        document.getElementById('error-direccion').textContent = '';
-        document.getElementById('error-telefono').textContent = '';
-        
-        const nombre = document.getElementById('nombre').value.trim();
-        const direccion = document.getElementById('direccion').value.trim();
-        const telefono = document.getElementById('telefono').value.trim();
-        
-        let hayErrores = false;
-        
-        if (nombre === '') {
-            document.getElementById('error-nombre').textContent = 'El nombre es obligatorio.';
-            hayErrores = true;
-        } else if (nombre.length < 3) {
-            document.getElementById('error-nombre').textContent = 'El nombre debe tener al menos 3 caracteres.';
-            hayErrores = true;
+        if (tipo === 'tarjeta' || tipo === 'transferencia') {
+            const datosTransferencia = document.getElementById('datos-transferencia');
+            datosTransferencia.style.display = tipo === 'transferencia' ? 'block' : 'none';
         }
-        
-        if (direccion === '') {
-            document.getElementById('error-direccion').textContent = 'La dirección es obligatoria.';
-            hayErrores = true;
+    };
+
+    // Eliminar producto del carrito
+    window.modificarCantidad = function(index, cambio) {
+        // Como el diseño muestra 1 unidad, si restan, eliminamos el producto
+        if (cambio === -1) {
+            carrito.splice(index, 1);
         }
-        
-        if (telefono === '') {
-            document.getElementById('error-telefono').textContent = 'El teléfono es obligatorio.';
-            hayErrores = true;
-        } else if (telefono.length < 8) {
-            document.getElementById('error-telefono').textContent = 'El teléfono debe tener al menos 8 dígitos.';
-            hayErrores = true;
+        // Si suman, duplicamos el producto (o podrías aumentar una propiedad cantidad)
+        if (cambio === 1) {
+            carrito.push({...carrito[index]});
         }
+        localStorage.setItem('carritoFogoncito', JSON.stringify(carrito));
+        renderizarCarrito();
+        actualizarContador();
+    };
+
+    // Inicializar
+    renderizarCarrito();
+
+    // Envío del formulario
+    formCheckout.addEventListener('submit', function(e) {
+        e.preventDefault();
         
-        if (hayErrores) {
+        if (carrito.length === 0) {
+            alert('El carrito está vacío.');
             return;
         }
 
-        if (carritoGuardado.length === 0) {
-            alert('Tu carrito está vacío. Agregá productos antes de confirmar.');
-            return;
-        }
-        
-        const totalFormateado = new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(total);
-        alert(`¡Gracias ${nombre}! 🍔\n\nTu pedido por un total de ${totalFormateado} fue confirmado.\n\nLo enviamos a: ${direccion}\nTe contactamos al: ${telefono}\n\n¡Que lo disfrutes!`);
-        
+        const nombre = document.getElementById('nombre').value;
+        const apellido = document.getElementById('apellido').value;
+        const direccion = document.getElementById('direccion') ? document.getElementById('direccion').value : 'Local';
+
+        // Guardamos los datos para la pantalla de confirmación
+        const pedidoData = {
+            cliente: `${nombre} ${apellido}`,
+            direccion: opcionEntrega === 'delivery' ? direccion : 'Pasa a retirar al local',
+            total: document.getElementById('resumen-total').textContent
+        };
+        localStorage.setItem('datosPedido', JSON.stringify(pedidoData));
+
+        // Limpiamos carrito y redirigimos
         localStorage.removeItem('carritoFogoncito');
-        window.location.href = '../index.html';
+        window.location.href = 'confirmacion.html';
     });
+}
+
+// =================================================================
+// 4. LÓGICA DE CONFIRMACIÓN (confirmacion.html)
+// =================================================================
+const nombreClienteHTML = document.getElementById('nombre-cliente');
+
+if (nombreClienteHTML) {
+    const pedidoData = JSON.parse(localStorage.getItem('datosPedido'));
+    
+    if (pedidoData) {
+        document.getElementById('nombre-cliente').textContent = pedidoData.cliente;
+        document.getElementById('direccion-cliente').textContent = pedidoData.direccion;
+        document.getElementById('total-cliente').textContent = pedidoData.total;
+    }
 }
